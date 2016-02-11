@@ -17,3 +17,4 @@ if __name__ == '__main__':
     rospy.init_node('buzzer')
     rospy.Subscriber("buzzer", UInt16, recv_buzzer)
     rospy.spin()
+
