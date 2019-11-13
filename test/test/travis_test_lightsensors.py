@@ -6,7 +6,7 @@ import time
 from pimouse_ros.msg import LightSensorValues
 
 class LightsensorTest(unittest.TestCase):
-    def setup(self):
+    def setUp(self):
         self.count = 0
         rospy.Subscriber('/lightsensors', LightSensorValues, self.callback)
         self.values = LightSensorValues()
@@ -15,7 +15,7 @@ class LightsensorTest(unittest.TestCase):
         self.count += 1
         self.values = data
 
-    def check_values(self,if,ls,rs,rf):
+    def check_values(self,lf,ls,rs,rf):
         vs = self.values
         self.assertEqual(vs.left_forward, lf, "different value: left_forward")
         self.assertEqual(vs.left_side, ls, "different value: left_side")
@@ -32,10 +32,9 @@ class LightsensorTest(unittest.TestCase):
         rospy.set_param('lightsensors_freq',10)
         time.sleep(2)
         with open("/dev/rtlightsensor0","w") as f:
-            f.write("-1 0 123 4321 \n")
+            f.write("-1 0 123 4321\n")
 
         time.sleep(3)
-
         self.assertFalse(self.count == 0,"cannot subscribe the topic")
         self.check_values(4321,123,0,-1)
 
