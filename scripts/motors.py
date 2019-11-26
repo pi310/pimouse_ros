@@ -68,16 +68,16 @@ class Motor():
             rospy.logerr("not enpowered")
             return False
 
-       dev = "/dev/rtmotor0"
-       try:
-           with open(dev,'w') as f:
-               f.write("%d %d %d\n" %
-                   (message.left_hz,message.right_hz,message.duration_ms))
-       except:
-           rospy.logerr("cannot write to " + dev)
-           return False
+        dev = "/dev/rtmotor0"
+        try:
+            with open(dev,'w') as f:
+                f.write("%d %d %d\n" %
+                    (message.left_hz,message.right_hz,message.duration_ms))
+        except:
+            rospy.logerr("cannot write to " + dev)
+            return False
 
-       return True
+        return True
 
 if __name__ == '__main__':
     rospy.init_node('motors')
