@@ -73,7 +73,7 @@ class MotorTest(unittest.TestCase):
         tm = rospy.ServiceProxy('/timed_motion', TimedMotion)
         tm(-321,654,1500)
         with open("/dev/rtmotor0","r") as f:
-            data - f.readline()
+            data = f.readline()
             self.assertEqual(data,"-321 654 1500\n","value does not written to rtmotor0")
 
 if __name__ == '__main__':
